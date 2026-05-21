@@ -20,7 +20,7 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import { STAFF, ORGANIZERS } from '@/constants/staff';
-import { isRegistrationOpen, getDeadlineDisplay, EVENT_DATE, EVENT_START, EVENT_END } from '@/lib/registration-deadline';
+import { isRegistrationOpen, EVENT_DATE, EVENT_START, EVENT_END } from '@/lib/registration-deadline';
 
 const faqs = [
   {
@@ -89,7 +89,7 @@ export default function LandingPage() {
       {registrationOpen && (
         <div className="bg-[#4A1078] text-white text-center py-2 px-4 text-sm font-medium">
           <Gift className="inline w-4 h-4 mr-2 mb-0.5" />
-          Free Registration — No payment required · Closes {getDeadlineDisplay()}
+          Free Registration — No payment required
         </div>
       )}
 
@@ -224,7 +224,7 @@ export default function LandingPage() {
       {/* Free Registration CTA */}
       <section className="py-16 max-w-2xl mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold text-[#4A1078] mb-4">Register Today — It&apos;s Free!</h2>
-        <p className="text-gray-600 mb-8">Secure your child&apos;s spot before registration closes at {getDeadlineDisplay()}.</p>
+        <p className="text-gray-600 mb-8">Secure your child&apos;s spot for our May 30 childcare event.</p>
         <div className="bg-white rounded-3xl border-2 border-[#4A1078] p-10 shadow-lg">
           <div className="w-16 h-16 bg-[#EDE0F5] rounded-full flex items-center justify-center mx-auto mb-4">
             <Gift className="w-8 h-8 text-[#4A1078]" />
@@ -255,9 +255,6 @@ export default function LandingPage() {
               >
                 Register Now — Free &rarr;
               </Link>
-              <p className="text-xs text-amber-600 mt-4 flex items-center justify-center gap-1">
-                <AlertCircle className="w-3 h-3" /> Closes at {getDeadlineDisplay()}
-              </p>
             </>
           ) : (
             <div className="bg-gray-100 text-gray-500 px-8 py-4 rounded-xl font-bold text-lg w-full text-center">

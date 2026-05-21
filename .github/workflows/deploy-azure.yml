@@ -2,12 +2,12 @@ name: Deploy to Azure App Service
 
 on:
   push:
-    branches: [main]
+    branches: [master, main]
   workflow_dispatch:
 
 env:
-  NODE_VERSION: '20.x'
-  AZURE_WEBAPP_NAME: hes-registration   # Change to your Azure App Service name
+  NODE_VERSION: '22.x'
+  AZURE_WEBAPP_NAME: hes-registration
 
 jobs:
   build-and-deploy:

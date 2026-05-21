@@ -27,7 +27,7 @@ export default function ReviewPage() {
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Registration failed');
+      if (!res.ok) throw new Error(data.detail || data.error || 'Registration failed');
 
       reset();
       router.push(`/register/success?conf=${data.confirmationNumber}`);

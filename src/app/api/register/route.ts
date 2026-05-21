@@ -121,6 +121,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ confirmationNumber: registration.confirmationNumber, registrationId: registration.id });
   } catch (err) {
     console.error('Registration error:', err);
-    return NextResponse.json({ error: 'Registration failed' }, { status: 500 });
+    const message = err instanceof Error ? err.message : String(err);
+    return NextResponse.json({ error: 'Registration failed', detail: message }, { status: 500 });
   }
 }

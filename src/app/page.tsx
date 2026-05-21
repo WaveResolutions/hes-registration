@@ -19,7 +19,7 @@ import {
   Gift,
   AlertCircle,
 } from 'lucide-react';
-import { STAFF, ORGANIZERS } from '@/constants/staff';
+import { ORGANIZERS } from '@/constants/staff';
 import { isRegistrationOpen, EVENT_DATE, EVENT_START, EVENT_END } from '@/lib/registration-deadline';
 
 const faqs = [
@@ -198,30 +198,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Meet the Team */}
-      <section className="py-16 bg-[#4A1078]">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-white mb-4">Meet Your Childcare Team</h2>
-          <p className="text-center text-purple-300 mb-10">Caring, attentive, and passionate about child safety.</p>
-          <div className="grid sm:grid-cols-3 gap-6">
-            {STAFF.map((s) => (
-              <div key={s.name} className="bg-white/10 backdrop-blur rounded-2xl p-6 text-center border border-white/20">
-                <div className="w-16 h-16 rounded-full bg-[#EDE0F5] flex items-center justify-center mx-auto mb-4 text-[#4A1078] text-2xl font-bold">
-                  {s.name.charAt(0)}
-                </div>
-                <h3 className="font-bold text-white text-lg">{s.name}</h3>
-                <p className="text-purple-300 text-sm mt-1">{s.role}</p>
-                <a href={`tel:${s.phone}`} className="inline-flex items-center gap-1 text-[#F59E0B] text-sm mt-3 hover:underline">
-                  <Phone className="w-3 h-3" />
-                  {s.phone}
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Free Registration CTA */}
+      {/* Free Signup CTA */}
       <section className="py-16 max-w-2xl mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold text-[#4A1078] mb-4">Sign Up Today — It&apos;s Free!</h2>
         <p className="text-gray-600 mb-8">Secure your child&apos;s spot for our May 30 childcare event.</p>

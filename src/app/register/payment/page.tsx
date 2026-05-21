@@ -15,7 +15,7 @@ export default function PaymentPage() {
   useEffect(() => {
     // Auto-confirm as free and move to review
     setPayment({ method: 'FREE', status: 'CONFIRMED' });
-    setCurrentStep(5);
+    setCurrentStep(4);
     router.replace('/register/review');
   }, [setPayment, setCurrentStep, router]);
 

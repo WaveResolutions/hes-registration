@@ -1,7 +1,7 @@
 'use client';
 import { cn } from '@/lib/utils';
 
-const steps = ['Parent', 'Children', 'Waiver', 'Payment', 'Review'];
+const steps = ['Parent', 'Children', 'Waiver', 'Review'];
 
 export function StepIndicator({ current }: { current: number }) {
   return (

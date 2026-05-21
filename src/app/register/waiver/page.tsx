@@ -86,7 +86,7 @@ export default function WaiverPage() {
     });
     // Payment is free — skip payment step, go straight to review
     setPayment({ method: 'FREE', status: 'CONFIRMED' });
-    setCurrentStep(5);
+    setCurrentStep(4);
     router.push('/register/review');
   };
 

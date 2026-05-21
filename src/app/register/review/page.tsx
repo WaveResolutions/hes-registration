@@ -45,7 +45,7 @@ export default function ReviewPage() {
 
   return (
     <div className="max-w-2xl mx-auto px-4 pb-16">
-      <StepIndicator current={5} />
+      <StepIndicator current={4} />
 
       <div className="mb-6">
         <h2 className="text-xl font-bold text-[#4A1078]">Review Your Registration</h2>

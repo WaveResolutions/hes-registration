@@ -1,0 +1,112 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Registration {
+  id                    String    @id @default(cuid())
+  confirmationNumber    String    @unique @default(cuid())
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  parentFirstName       String
+  parentLastName        String
+  relationship          String
+  email                 String
+  phone                 String
+  address               String?
+  emergencyContactName  String
+  emergencyContactPhone String
+  emergencyContactRel   String
+
+  paymentMethod         PaymentMethod
+  paymentStatus         PaymentStatus @default(PENDING)
+  stripePaymentIntentId String?
+  zelleScreenshotUrl    String?
+  amountCents           Int
+  paidAt                DateTime?
+
+  waiverSignedAt        DateTime?
+  waiverSignatureUrl    String?
+  waiverSignatureType   String?
+  waiverTypedName       String?
+  waiverIpAddress       String?
+  waiverUserAgent       String?
+  waiverPdfUrl          String?
+
+  photoConsent          Boolean   @default(true)
+
+  children              Child[]
+  authorizedPickups     AuthorizedPickup[]
+}
+
+model Child {
+  id               String    @id @default(cuid())
+  registrationId   String
+  registration     Registration @relation(fields: [registrationId], references: [id])
+
+  firstName        String
+  lastName         String
+  dateOfBirth      DateTime
+  age              Int
+  gender           String?
+  allergies        String?
+  medicalConditions String?
+  specialNotes     String?
+
+  checkedIn        Boolean   @default(false)
+  checkedInAt      DateTime?
+  checkedInBy      String?
+  checkedOut       Boolean   @default(false)
+  checkedOutAt     DateTime?
+  checkedOutBy     String?
+
+  authorizedPickups AuthorizedPickup[]
+
+  @@index([registrationId])
+}
+
+model AuthorizedPickup {
+  id              String  @id @default(cuid())
+  registrationId  String
+  registration    Registration @relation(fields: [registrationId], references: [id])
+  childId         String?
+  child           Child?  @relation(fields: [childId], references: [id])
+
+  name            String
+  relationship    String
+  phone           String
+  idType          String?
+}
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      AdminRole @default(STAFF)
+  createdAt DateTime @default(now())
+}
+
+enum PaymentMethod {
+  STRIPE
+  ZELLE
+  FREE
+}
+
+enum PaymentStatus {
+  PENDING
+  PENDING_ZELLE
+  CONFIRMED
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  STAFF
+}

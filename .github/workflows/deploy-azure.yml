@@ -1,0 +1,63 @@
+name: Deploy to Azure App Service
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20.x'
+  AZURE_WEBAPP_NAME: hes-registration   # Change to your Azure App Service name
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      - name: Build Next.js app
+        run: npm run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          NEXT_PUBLIC_APP_URL: ${{ secrets.NEXTAUTH_URL }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          NEXT_PUBLIC_VENUE_ADDRESS: ${{ secrets.NEXT_PUBLIC_VENUE_ADDRESS }}
+          NEXT_PUBLIC_EVENT_NAME: "HES Babysitting — May 30, 2026"
+          NEXT_PUBLIC_CONTACT_MAIN_NAME: "Kshitiz Shrestha"
+          NEXT_PUBLIC_CONTACT_MAIN_PHONE: "(312) 627-0600"
+          NEXT_PUBLIC_CONTACT_BACKUP_NAME: "Manish Chaudhary"
+          NEXT_PUBLIC_CONTACT_BACKUP_PHONE: "(847) 224-4156"
+          NEXT_PUBLIC_NEAREST_HOSPITAL: "Endeavor Health Glenbrook Hospital"
+
+      - name: Package standalone build
+        run: |
+          cp -r .next/standalone ./deploy
+          cp -r .next/static ./deploy/.next/static
+          cp -r public ./deploy/public
+          cp package.json ./deploy/
+        shell: bash
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ./deploy
+          startup-command: 'node server.js'

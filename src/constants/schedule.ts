@@ -1,0 +1,18 @@
+export const SCHEDULE = [
+  { time: '10:00 AM', activity: 'Kids Arrive / Check-In & Welcome', notes: 'Name tags issued' },
+  { time: '10:15 AM', activity: 'Morning Activity Block 1', notes: 'Adriane leads' },
+  { time: '11:00 AM', activity: 'Morning Activity Block 2', notes: 'Riya leads' },
+  { time: '11:45 AM', activity: 'Clean-up & Transition', notes: 'Prep for lunch' },
+  { time: '12:00 PM', activity: 'Kids Eat Lunch with Parents', notes: 'Babysitters on lunch break' },
+  { time: '2:00 PM', activity: 'Afternoon Activity Block 1', notes: 'Sol leads' },
+  { time: '3:00 PM', activity: 'Afternoon Activity Block 2', notes: 'Adriane leads' },
+  { time: '4:00 PM', activity: 'Quiet / Rest Time', notes: 'Books, puzzles' },
+  { time: '4:30 PM', activity: 'Afternoon Activity Block 3', notes: 'Sol leads' },
+  { time: '5:30 PM', activity: 'Wrap-Up / Tidy', notes: 'Transition prep' },
+  { time: '6:00 PM', activity: 'Free Play / Wind Down', notes: 'Adriane & Riya' },
+  { time: '6:30 PM', activity: 'Buffet Dinner (Kids + Staff)', notes: 'All staff eat together' },
+  { time: '7:30 PM', activity: 'Evening Activities', notes: 'Riya & Sol leads' },
+  { time: '8:30 PM', activity: 'Evening Wind Down', notes: 'Movie / Story Time' },
+  { time: '9:30 PM', activity: 'Prepare for Pick-Up', notes: 'Pack belongings' },
+  { time: '10:00 PM', activity: 'Event Ends — Kids Released', notes: 'Sign-out required, ID check' },
+];

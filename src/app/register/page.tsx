@@ -111,7 +111,7 @@ export default function ParentInfoPage() {
               <Label>Relationship to Child *</Label>
               <Select
                 defaultValue={parent.relationship || ''}
-                onValueChange={(v) => setValue('relationship', v)}
+                onValueChange={(v) => setValue('relationship', v, { shouldValidate: true })}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select relationship" />

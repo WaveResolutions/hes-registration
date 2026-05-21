@@ -160,7 +160,7 @@ export default function WaiverPage() {
                 className="mt-1 w-4 h-4 accent-[#4A1078] cursor-pointer"
               />
               <span className="text-sm text-gray-700 leading-relaxed">
-                I, <strong>{parentName || 'parent/guardian'}</strong>, have read and fully understand the Liability Waiver above. I agree to all terms on behalf of myself and my child(ren) listed in this registration.
+                I, <strong>{parentName || 'parent/guardian'}</strong>, have read and fully understand the Liability Waiver above. I agree to all terms on behalf of myself and my child(ren) listed in this signup.
               </span>
             </label>
             {!scrolled && (

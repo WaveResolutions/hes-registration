@@ -40,8 +40,8 @@ function SuccessContent() {
           <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
             <CheckCircle2 className="w-12 h-12 text-green-500" />
           </div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Registration Submitted!</h2>
-          <p className="text-gray-500 text-lg">Your registration for May 30, 2026 has been received.</p>
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">You&apos;re Signed Up!</h2>
+          <p className="text-gray-500 text-lg">Your signup for May 30, 2026 has been received.</p>
         </div>
 
         {/* Confirmation Number */}
@@ -81,7 +81,7 @@ function SuccessContent() {
                 'Structured activities throughout the day led by trained staff',
                 'Buffet dinner for kids and staff at 6:30 PM',
                 'Pick-up begins at 10:00 PM — valid photo ID required for all pickups',
-                'Only authorized pickups on your registration may collect your child',
+                'Only authorized pickups on your signup may collect your child',
                 'Nearest hospital: Endeavor Health Glenbrook Hospital',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-2">

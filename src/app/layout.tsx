@@ -16,9 +16,9 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "HES — Child Registration | May 30, 2026",
+  title: "HES — Child Signup | May 30, 2026",
   description:
-    "Register your child for professional babysitting services at Hamro Event Solutions LLC private event on Saturday, May 30, 2026. Safe, supervised, structured childcare from 10 AM to 10 PM.",
+    "Sign up your child for childcare services at Hamro Event Solutions LLC private event on Saturday, May 30, 2026. Safe, supervised, structured childcare from 8 AM to 9 PM.",
 };
 
 export default function RootLayout({

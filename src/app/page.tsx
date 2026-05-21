@@ -33,15 +33,15 @@ const faqs = [
   },
   {
     q: 'Who can pick up my child?',
-    a: 'Only individuals listed as authorized pickups on your registration form may collect your child. Valid government-issued photo ID will be required at pick-up. No exceptions.',
+    a: 'Only individuals listed as authorized pickups on your signup form may collect your child. Valid government-issued photo ID will be required at pick-up. No exceptions.',
   },
   {
-    q: 'Is registration really free?',
-    a: 'Yes! Registration for this event is completely free. Simply fill out the registration form, sign the waiver, and you are confirmed. No payment required.',
+    q: 'Is signup really free?',
+    a: 'Yes! Signup for this event is completely free. Simply fill out the signup form, sign the waiver, and you are confirmed. No payment required.',
   },
   {
     q: 'What happens if there is a medical emergency?',
-    a: 'Our staff is trained in first aid. In case of emergency, we will call 911 immediately and transport your child to Endeavor Health Glenbrook Hospital — the nearest facility to the venue. We will contact you at the emergency number provided during registration.',
+    a: 'Our staff is trained in first aid. In case of emergency, we will call 911 immediately and transport your child to Endeavor Health Glenbrook Hospital — the nearest facility to the venue. We will contact you at the emergency number provided during signup.',
   },
 ];
 
@@ -67,11 +67,11 @@ export default function LandingPage() {
               href="/register"
               className="bg-[#4A1078] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-purple-900 transition-colors whitespace-nowrap"
             >
-              Register Free →
+              Sign Up Free →
             </Link>
           ) : (
             <span className="bg-gray-200 text-gray-500 px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap cursor-not-allowed">
-              Registration Closed
+              Signup Closed
             </span>
           )}
         </div>
@@ -81,7 +81,7 @@ export default function LandingPage() {
       {!registrationOpen && (
         <div className="bg-red-600 text-white text-center py-3 px-4 text-sm font-medium">
           <AlertCircle className="inline w-4 h-4 mr-2 mb-0.5" />
-          Registration is now closed. Thank you to all who registered!
+          Signup is now closed. Thank you to all who signed up!
         </div>
       )}
 
@@ -89,7 +89,7 @@ export default function LandingPage() {
       {registrationOpen && (
         <div className="bg-[#4A1078] text-white text-center py-2 px-4 text-sm font-medium">
           <Gift className="inline w-4 h-4 mr-2 mb-0.5" />
-          Free Registration — No payment required
+          Free Signup — No payment required
         </div>
       )}
 
@@ -115,7 +115,7 @@ export default function LandingPage() {
             Hamro Event Solutions LLC is providing full-day childcare so you can enjoy the event worry-free. Structured activities, meals, and caring staff — all included.
           </p>
           <div className="inline-flex items-center gap-2 bg-[#F59E0B]/20 border border-[#F59E0B]/40 rounded-full px-5 py-2 text-[#F59E0B] font-bold text-lg mb-8">
-            <Gift className="w-5 h-5" /> FREE Registration
+            <Gift className="w-5 h-5" /> FREE Signup
           </div>
           <br />
           {registrationOpen ? (
@@ -123,18 +123,18 @@ export default function LandingPage() {
               href="/register"
               className="inline-flex items-center gap-2 bg-[#F59E0B] hover:bg-amber-500 text-black font-bold px-8 py-4 rounded-xl text-lg transition-all shadow-lg hover:scale-105"
             >
-              Register Your Child &rarr;
+              Sign Up Your Child &rarr;
             </Link>
           ) : (
             <div className="inline-flex items-center gap-2 bg-white/20 text-white font-bold px-8 py-4 rounded-xl text-lg">
-              Registration Closed
+              Signup Closed
             </div>
           )}
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4 text-sm">
             {[
               { icon: Shield, label: 'Safe Environment' },
               { icon: CheckCircle2, label: 'Caring Staff' },
-              { icon: Gift, label: 'Free to Register' },
+              { icon: Gift, label: 'Free to Sign Up' },
             ].map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
                 <Icon className="w-4 h-4 text-[#F59E0B]" />
@@ -223,14 +223,14 @@ export default function LandingPage() {
 
       {/* Free Registration CTA */}
       <section className="py-16 max-w-2xl mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold text-[#4A1078] mb-4">Register Today — It&apos;s Free!</h2>
+        <h2 className="text-3xl font-bold text-[#4A1078] mb-4">Sign Up Today — It&apos;s Free!</h2>
         <p className="text-gray-600 mb-8">Secure your child&apos;s spot for our May 30 childcare event.</p>
         <div className="bg-white rounded-3xl border-2 border-[#4A1078] p-10 shadow-lg">
           <div className="w-16 h-16 bg-[#EDE0F5] rounded-full flex items-center justify-center mx-auto mb-4">
             <Gift className="w-8 h-8 text-[#4A1078]" />
           </div>
           <div className="text-5xl font-bold text-[#4A1078] mb-2">FREE</div>
-          <p className="text-gray-500 text-lg mb-1">No registration fee</p>
+          <p className="text-gray-500 text-lg mb-1">No signup fee</p>
           <p className="text-sm text-gray-400 mb-8">Includes all activities, supervision, lunch &amp; dinner</p>
           <ul className="text-left space-y-3 mb-8 max-w-xs mx-auto">
             {[
@@ -253,12 +253,12 @@ export default function LandingPage() {
                 href="/register"
                 className="inline-flex items-center gap-2 bg-[#4A1078] text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-purple-900 transition-colors w-full justify-center"
               >
-                Register Now — Free &rarr;
+                Sign Up Now — Free &rarr;
               </Link>
             </>
           ) : (
             <div className="bg-gray-100 text-gray-500 px-8 py-4 rounded-xl font-bold text-lg w-full text-center">
-              Registration Closed
+              Signup Closed
             </div>
           )}
         </div>
@@ -330,7 +330,7 @@ export default function LandingPage() {
               </a>
               {registrationOpen && (
                 <Link href="/register" className="inline-flex items-center gap-1 bg-[#4A1078] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-900 mt-2">
-                  Register Free
+                  Sign Up Free
                 </Link>
               )}
             </div>

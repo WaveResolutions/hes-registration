@@ -48,7 +48,7 @@ export default function ReviewPage() {
       <StepIndicator current={4} />
 
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-[#4A1078]">Review Your Registration</h2>
+        <h2 className="text-xl font-bold text-[#4A1078]">Review Your Signup</h2>
         <p className="text-gray-500 text-sm mt-1">Please review all details before submitting.</p>
       </div>
 
@@ -213,7 +213,7 @@ export default function ReviewPage() {
           {loading ? (
             <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Submitting...</>
           ) : (
-            <><CheckCircle2 className="w-5 h-5 mr-2" /> Submit Registration</>
+            <><CheckCircle2 className="w-5 h-5 mr-2" /> Complete Signup</>
           )}
         </Button>
       </div>

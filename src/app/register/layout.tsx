@@ -23,7 +23,7 @@ export default function RegisterLayout({ children }: { children: React.ReactNode
             />
           </Link>
           <div className="text-right">
-            <p className="text-white font-semibold text-sm leading-tight">Child Registration</p>
+            <p className="text-white font-semibold text-sm leading-tight">Child Signup</p>
             <p className="text-purple-300 text-xs">May 30, 2026 · 8 AM – 9 PM · Free</p>
           </div>
         </div>

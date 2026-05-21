@@ -23,7 +23,7 @@ export async function sendConfirmationEmail({
   waiverPdfUrl?: string;
 }) {
   const resend = getResend();
-  const subject = '✅ Registration Confirmed — HES Childcare May 30, 2026';
+  const subject = '✅ Signup Confirmed — HES Childcare May 30, 2026';
 
   const childrenList = children.map((c) => `• ${c.firstName} ${c.lastName}, Age ${c.age}`).join('\n');
   const pickupList = authorizedPickups.map((p) => p.name).join(', ');
@@ -36,14 +36,14 @@ export async function sendConfirmationEmail({
       </div>
       <div style="padding: 32px 24px;">
         <p>Hi ${parentName},</p>
-        <p>Your registration is <strong>confirmed</strong>! Here's your summary:</p>
+        <p>Your signup is <strong>confirmed</strong>! Here's your summary:</p>
         <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
           <tr><td style="padding: 8px; font-weight: bold; color: #4A1078;">Confirmation #</td><td style="padding: 8px;">${confirmationNumber}</td></tr>
           <tr style="background:#f9f5ff"><td style="padding: 8px; font-weight: bold; color: #4A1078;">Date</td><td style="padding: 8px;">Saturday, May 30, 2026</td></tr>
           <tr><td style="padding: 8px; font-weight: bold; color: #4A1078;">Service Hours</td><td style="padding: 8px;">8:00 AM – 9:00 PM</td></tr>
-          <tr style="background:#f9f5ff"><td style="padding: 8px; font-weight: bold; color: #4A1078;">Registration Fee</td><td style="padding: 8px; color: #059669; font-weight: bold;">FREE</td></tr>
+          <tr style="background:#f9f5ff"><td style="padding: 8px; font-weight: bold; color: #4A1078;">Signup Fee</td><td style="padding: 8px; color: #059669; font-weight: bold;">FREE</td></tr>
         </table>
-        <p><strong>Children Registered:</strong></p>
+        <p><strong>Children Signed Up:</strong></p>
         <pre style="background: #f9f5ff; padding: 12px; border-radius: 8px; font-family: sans-serif;">${childrenList}</pre>
         <p><strong>Authorized Pick-Up:</strong> ${pickupList}</p>
         <div style="background: #FEF3C7; border-left: 4px solid #F59E0B; padding: 16px; margin: 24px 0; border-radius: 0 8px 8px 0;">
@@ -71,8 +71,8 @@ export async function sendConfirmationEmail({
     resend.emails.send({
       from: process.env.EMAIL_FROM!,
       to: [process.env.EMAIL_ADMIN!, process.env.EMAIL_ADMIN_BACKUP!].filter(Boolean) as string[],
-      subject: `New Registration: ${parentName} — ${children.length} child(ren)`,
-      html: `<p>New registration received.</p><p><strong>Parent:</strong> ${parentName} (${to})</p><p><strong>Children:</strong> ${children.length}</p><p><strong>Confirmation #:</strong> ${confirmationNumber}</p><p><strong>Payment:</strong> ${paymentMethod}</p>`,
+      subject: `New Signup: ${parentName} — ${children.length} child(ren)`,
+      html: `<p>New signup received.</p><p><strong>Parent:</strong> ${parentName} (${to})</p><p><strong>Children:</strong> ${children.length}</p><p><strong>Confirmation #:</strong> ${confirmationNumber}</p><p><strong>Payment:</strong> ${paymentMethod}</p>`,
     }),
   ]);
 

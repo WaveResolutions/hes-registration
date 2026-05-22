@@ -116,7 +116,7 @@ export async function POST(req: NextRequest) {
       confirmationNumber: registration.confirmationNumber,
       children: registration.children.map((c) => ({ firstName: c.firstName, lastName: c.lastName, age: c.age })),
       authorizedPickups: registration.authorizedPickups,
-    }).catch(console.error);
+    }).catch((e) => console.error('Email send failed:', e?.message || e));
 
     return NextResponse.json({ confirmationNumber: registration.confirmationNumber, registrationId: registration.id });
   } catch (err) {

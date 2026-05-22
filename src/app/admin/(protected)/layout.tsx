@@ -18,9 +18,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Link href="/admin/waivers" className="hover:text-purple-200 px-2 py-1 rounded hover:bg-white/10 transition-colors">
             Waivers
           </Link>
-          <Link href="/api/auth/signout" className="hover:text-purple-200 px-2 py-1 rounded hover:bg-white/10 transition-colors text-purple-300">
+          <button
+            onClick={async () => { await fetch('/api/admin/auth', { method: 'DELETE' }); window.location.href = '/admin/login'; }}
+            className="hover:text-purple-200 px-2 py-1 rounded hover:bg-white/10 transition-colors text-purple-300 text-sm"
+          >
             Sign Out
-          </Link>
+          </button>
         </div>
       </nav>
       <main className="p-4 md:p-6">{children}</main>

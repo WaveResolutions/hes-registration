@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import { SignOutButton } from './SignOutButton';
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();
@@ -26,12 +27,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <Link href="/admin/waivers" className="hover:text-purple-200 px-2 py-1 rounded hover:bg-white/10 transition-colors">
             Waivers
           </Link>
-          <button
-            onClick={async () => { await fetch('/api/admin/auth', { method: 'DELETE' }); window.location.href = '/admin-login'; }}
-            className="hover:text-purple-200 px-2 py-1 rounded hover:bg-white/10 transition-colors text-purple-300 text-sm"
-          >
-            Sign Out
-          </button>
+          <SignOutButton />
         </div>
       </nav>
       <main className="p-4 md:p-6">{children}</main>

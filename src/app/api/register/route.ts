@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
-import { sendConfirmationEmail } from '@/lib/resend';
+import { sendConfirmationEmail } from '@/lib/email';
 import { generateWaiverPdf } from '@/lib/pdf';
 import { uploadFile } from '@/lib/storage';
 import { differenceInYears } from 'date-fns';
@@ -116,8 +116,6 @@ export async function POST(req: NextRequest) {
       confirmationNumber: registration.confirmationNumber,
       children: registration.children.map((c) => ({ firstName: c.firstName, lastName: c.lastName, age: c.age })),
       authorizedPickups: registration.authorizedPickups,
-      paymentMethod: 'FREE',
-      waiverPdfUrl: pdfUrl,
     }).catch(console.error);
 
     return NextResponse.json({ confirmationNumber: registration.confirmationNumber, registrationId: registration.id });

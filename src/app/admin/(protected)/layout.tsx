@@ -1,6 +1,14 @@
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get('hes_admin')?.value;
+  if (!token || token !== process.env.ADMIN_TOKEN) {
+    redirect('/admin/login');
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-[#4A1078] text-white px-6 py-4 flex items-center justify-between">

@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { CheckCircle2, Clock, Users, Baby, CreditCard, Download, RefreshCw, Loader2 } from 'lucide-react';
+import { CheckCircle2, Clock, Users, Baby, Download, RefreshCw, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Child {
@@ -115,8 +115,8 @@ export default function AdminOverviewPage() {
   };
 
   const totalChildren = registrations.reduce((acc, r) => acc + r.children.length, 0);
-  const paidCount = registrations.filter((r) => r.paymentStatus === 'PAID' || r.paymentStatus === 'CONFIRMED').length;
-  const pendingZelleCount = registrations.filter((r) => r.paymentStatus === 'PENDING_ZELLE').length;
+  const waiverSignedCount = registrations.filter((r) => r.waiverSignedAt).length;
+  const spotsRemaining = Math.max(0, 30 - totalChildren);
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -140,8 +140,8 @@ export default function AdminOverviewPage() {
         {[
           { label: 'Total Children', value: totalChildren, icon: Baby, color: 'text-purple-600', bg: 'bg-purple-50' },
           { label: 'Families', value: registrations.length, icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
-          { label: 'Paid (Card)', value: paidCount, icon: CreditCard, color: 'text-green-600', bg: 'bg-green-50' },
-          { label: 'Pending Zelle', value: pendingZelleCount, icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50' },
+          { label: 'Waivers Signed', value: waiverSignedCount, icon: CheckCircle2, color: 'text-green-600', bg: 'bg-green-50' },
+          { label: 'Spots Remaining', value: spotsRemaining, icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50' },
         ].map(({ label, value, icon: Icon, color, bg }) => (
           <Card key={label} className="border-0 shadow-sm">
             <CardContent className="pt-5 flex items-center gap-3">
@@ -177,7 +177,6 @@ export default function AdminOverviewPage() {
                   <TableHead>Email</TableHead>
                   <TableHead>Phone</TableHead>
                   <TableHead className="text-center">Children</TableHead>
-                  <TableHead>Payment</TableHead>
                   <TableHead>Waiver</TableHead>
                   <TableHead>Registered</TableHead>
                   <TableHead>Actions</TableHead>
@@ -201,10 +200,6 @@ export default function AdminOverviewPage() {
                         </span>
                       </TableCell>
                       <TableCell>
-                        <Badge className={`${statusInfo.className} text-xs`}>{statusInfo.label}</Badge>
-                        <div className="text-xs text-gray-400 mt-0.5">${(reg.amountCents / 100).toFixed(2)}</div>
-                      </TableCell>
-                      <TableCell>
                         {reg.waiverSignedAt ? (
                           <div className="flex items-center gap-1 text-green-600 text-xs">
                             <CheckCircle2 className="w-3 h-3" /> Signed
@@ -222,20 +217,9 @@ export default function AdminOverviewPage() {
                         {new Date(reg.createdAt).toLocaleDateString()}
                       </TableCell>
                       <TableCell>
-                        {reg.paymentStatus === 'PENDING_ZELLE' && (
-                          <Button
-                            size="sm"
-                            onClick={() => confirmZelle(reg.id)}
-                            disabled={confirmingId === reg.id}
-                            className="bg-[#4A1078] hover:bg-purple-900 text-white text-xs"
-                          >
-                            {confirmingId === reg.id ? (
-                              <Loader2 className="w-3 h-3 animate-spin" />
-                            ) : (
-                              'Confirm Zelle'
-                            )}
-                          </Button>
-                        )}
+                        <a href={`/api/register/waiver-pdf?conf=${reg.confirmationNumber}`} target="_blank" rel="noopener noreferrer" className="text-xs text-[#4A1078] hover:underline">
+                          PDF
+                        </a>
                       </TableCell>
                     </TableRow>
                   );

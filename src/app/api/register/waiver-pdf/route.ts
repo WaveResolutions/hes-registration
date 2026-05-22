@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
     signedAt: registration.waiverSignedAt?.toISOString() ?? new Date().toISOString(),
   });
 
-  return new NextResponse(pdfBytes, {
+  return new NextResponse(Buffer.from(pdfBytes), {
     headers: {
       'Content-Type': 'application/pdf',
       'Content-Disposition': `attachment; filename="waiver-${conf}.pdf"`,

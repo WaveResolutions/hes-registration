@@ -6,7 +6,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const cookieStore = await cookies();
   const token = cookieStore.get('hes_admin')?.value;
   if (!token || token !== process.env.ADMIN_TOKEN) {
-    redirect('/admin/login');
+    redirect('/admin-login');
   }
 
   return (
@@ -27,7 +27,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             Waivers
           </Link>
           <button
-            onClick={async () => { await fetch('/api/admin/auth', { method: 'DELETE' }); window.location.href = '/admin/login'; }}
+            onClick={async () => { await fetch('/api/admin/auth', { method: 'DELETE' }); window.location.href = '/admin-login'; }}
             className="hover:text-purple-200 px-2 py-1 rounded hover:bg-white/10 transition-colors text-purple-300 text-sm"
           >
             Sign Out

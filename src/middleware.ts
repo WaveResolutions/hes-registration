@@ -1,2 +1,2 @@
-// No middleware needed — admin auth handled in (protected)/layout.tsx
+// No middleware — admin auth handled server-side in (protected)/layout.tsx
 export {};

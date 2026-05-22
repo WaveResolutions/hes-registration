@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import Image from 'next/image';
-import { CheckCircle2, CalendarDays, Clock, Phone, Download, MapPin } from 'lucide-react';
+import { CheckCircle2, CalendarDays, Clock, Phone } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 function SuccessContent() {
@@ -63,10 +63,6 @@ function SuccessContent() {
               <Clock className="w-4 h-4 text-[#4A1078] shrink-0" />
               <span>8:00 AM &ndash; 9:00 PM (childcare hours)</span>
             </div>
-            <div className="flex items-center gap-3 text-sm text-gray-700">
-              <MapPin className="w-4 h-4 text-[#4A1078] shrink-0" />
-              <span>Venue: TBD &mdash; You will receive venue details by email</span>
-            </div>
           </CardContent>
         </Card>
 
@@ -76,7 +72,7 @@ function SuccessContent() {
             <h3 className="font-semibold text-[#4A1078] mb-3">What to Expect on May 30</h3>
             <ul className="space-y-2 text-sm text-gray-700">
               {[
-                'Check-in starts at 8:00 AM — bring your confirmation number and valid ID',
+                'Check-in starts at 8:00 AM — bring valid photo ID',
                 'Children join parents for lunch 12:00 PM – 2:00 PM',
                 'Structured activities throughout the day led by trained staff',
                 'Buffet dinner for kids and staff at 6:30 PM',
@@ -102,12 +98,6 @@ function SuccessContent() {
             className="flex items-center justify-center gap-2 bg-white border-2 border-[#4A1078] text-[#4A1078] px-4 py-3 rounded-xl font-semibold text-sm hover:bg-[#EDE0F5] transition-colors"
           >
             <CalendarDays className="w-4 h-4" /> Add to Google Calendar
-          </a>
-          <a
-            href={`/api/register/waiver-pdf?conf=${conf}`}
-            className="flex items-center justify-center gap-2 bg-white border-2 border-gray-200 text-gray-600 px-4 py-3 rounded-xl font-semibold text-sm hover:bg-gray-50 transition-colors"
-          >
-            <Download className="w-4 h-4" /> Download Waiver PDF
           </a>
         </div>
 

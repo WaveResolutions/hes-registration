@@ -19,7 +19,8 @@ export async function POST(req: NextRequest) {
     const { parent, children, authorizedPickups, waiver, payment } = body;
 
     const isFree = !payment?.method || payment.method === 'FREE';
-    const amountCents = 0; // Free registration
+    const amountCents = 0;
+    const confirmationNumber = 'HES-' + Math.random().toString(36).slice(2, 8).toUpperCase();
 
     // Upload signature if drawn
     let signatureUrl: string | undefined;
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest) {
 
     const registration = await prisma.registration.create({
       data: {
+        confirmationNumber,
         parentFirstName: parent.parentFirstName,
         parentLastName: parent.parentLastName,
         relationship: parent.relationship,

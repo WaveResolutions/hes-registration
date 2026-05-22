@@ -1,6 +1,6 @@
-﻿export const WAIVER_TEXT = `Childcare ServiceS â€” LIABILITY WAIVER & RELEASE OF CLAIMS
+﻿export const WAIVER_TEXT = `Childcare Services — LIABILITY WAIVER & RELEASE OF CLAIMS
 Hamro Event Solutions LLC
-Saturday, May 30, 2026 | 10:00 AM â€“ 10:00 PM
+Saturday, May 30, 2026 | 8:00 AM — 9:00 PM
 
 This Liability Waiver and Release of Claims ("Agreement") is entered into by the undersigned parent or legal guardian ("Parent/Guardian") on behalf of themselves and their minor child(ren) ("Child") in favor of Hamro Event Solutions LLC, its members, officers, employees, agents, and contracted staff (collectively "HES").
 

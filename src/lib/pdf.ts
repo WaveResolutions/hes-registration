@@ -65,8 +65,8 @@ export async function generateWaiverPdf(opts: WaiverPdfOptions): Promise<Uint8Ar
   drawText('Saturday, May 30, 2026 | 8:00 AM – 9:00 PM', 10, false, gray);
   y -= 10;
 
-  // Waiver text sections
-  const sections = WAIVER_TEXT.split('\n\n');
+  // Waiver text sections (skip first paragraph — already shown in header)
+  const sections = WAIVER_TEXT.split('\n\n').slice(1);
   for (const section of sections) {
     const trimmed = section.trim();
     if (!trimmed) continue;

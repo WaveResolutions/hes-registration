@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import Image from 'next/image';
-import { CheckCircle2, CalendarDays, Clock, Phone } from 'lucide-react';
+import { CheckCircle2, CalendarDays, Clock, Phone, Download } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 function SuccessContent() {
@@ -98,6 +98,12 @@ function SuccessContent() {
             className="flex items-center justify-center gap-2 bg-white border-2 border-[#4A1078] text-[#4A1078] px-4 py-3 rounded-xl font-semibold text-sm hover:bg-[#EDE0F5] transition-colors"
           >
             <CalendarDays className="w-4 h-4" /> Add to Google Calendar
+          </a>
+          <a
+            href={`/api/register/waiver-pdf?conf=${conf}`}
+            className="flex items-center justify-center gap-2 bg-white border-2 border-gray-200 text-gray-600 px-4 py-3 rounded-xl font-semibold text-sm hover:bg-gray-50 transition-colors"
+          >
+            <Download className="w-4 h-4" /> Download Waiver PDF
           </a>
         </div>
 

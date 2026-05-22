@@ -62,7 +62,7 @@ export async function generateWaiverPdf(opts: WaiverPdfOptions): Promise<Uint8Ar
 
   y = 720;
   drawText('BABYSITTING SERVICES — LIABILITY WAIVER & RELEASE OF CLAIMS', 12, true, purple);
-  drawText('Saturday, May 30, 2026 | 10:00 AM – 10:00 PM', 10, false, gray);
+  drawText('Saturday, May 30, 2026 | 8:00 AM – 9:00 PM', 10, false, gray);
   y -= 10;
 
   // Waiver text sections

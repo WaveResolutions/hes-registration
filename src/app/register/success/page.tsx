@@ -76,11 +76,11 @@ function SuccessContent() {
             <h3 className="font-semibold text-[#4A1078] mb-3">What to Expect on May 30</h3>
             <ul className="space-y-2 text-sm text-gray-700">
               {[
-                'Check-in starts at 10:00 AM — bring your confirmation number and valid ID',
+                'Check-in starts at 8:00 AM — bring your confirmation number and valid ID',
                 'Children join parents for lunch 12:00 PM – 2:00 PM',
                 'Structured activities throughout the day led by trained staff',
                 'Buffet dinner for kids and staff at 6:30 PM',
-                'Pick-up begins at 10:00 PM — valid photo ID required for all pickups',
+                'Pick-up begins at 9:00 PM — valid photo ID required for all pickups',
                 'Only authorized pickups on your signup may collect your child',
                 'Nearest hospital: Endeavor Health Glenbrook Hospital',
               ].map((item, i) => (

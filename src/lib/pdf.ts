@@ -25,7 +25,7 @@ export async function generateWaiverPdf(opts: WaiverPdfOptions): Promise<Uint8Ar
   const width = 612 - margin * 2;
 
   const wrapText = (text: string, maxWidth: number, size: number, f: typeof font): string[] => {
-    const words = text.split(' ');
+    const words = text.replace(/\r?\n/g, ' ').split(' ').filter(w => w.length > 0);
     const lines: string[] = [];
     let current = '';
     for (const word of words) {

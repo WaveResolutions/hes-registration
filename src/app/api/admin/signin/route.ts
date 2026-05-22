@@ -1,13 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-
-export const dynamic = 'force-dynamic';
-import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
+function isAuthorized(req: NextRequest) {
+  const token = req.cookies.get('hes_admin')?.value;
+  return token && token === process.env.ADMIN_TOKEN;
+}
+
 export async function PATCH(req: NextRequest) {
-  const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!isAuthorized(req)) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const { childId, action, staffName } = await req.json();
 

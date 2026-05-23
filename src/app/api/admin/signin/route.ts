@@ -13,10 +13,16 @@ export async function PATCH(req: NextRequest) {
 
   const { childId, action, staffName } = await req.json();
 
-  const data =
-    action === 'checkin'
-      ? { checkedIn: true, checkedInAt: new Date(), checkedInBy: staffName }
-      : { checkedOut: true, checkedOutAt: new Date(), checkedOutBy: staffName };
+  const now = new Date();
+  const dataMap: Record<string, object> = {
+    checkin:    { checkedIn: true,   checkedInAt: now,   checkedInBy: staffName },
+    checkout:   { checkedOut: true,  checkedOutAt: now,  checkedOutBy: staffName },
+    lunchout:   { lunchedOut: true,  lunchedOutAt: now,  lunchedOutBy: staffName },
+    lunchback:  { lunchedBack: true, lunchedBackAt: now, lunchedBackBy: staffName },
+  };
+
+  const data = dataMap[action];
+  if (!data) return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
 
   const child = await prisma.child.update({ where: { id: childId }, data });
   return NextResponse.json(child);

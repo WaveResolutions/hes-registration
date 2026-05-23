@@ -60,6 +60,12 @@ model Child {
   checkedIn        Boolean   @default(false)
   checkedInAt      DateTime?
   checkedInBy      String?
+  lunchedOut       Boolean   @default(false)
+  lunchedOutAt     DateTime?
+  lunchedOutBy     String?
+  lunchedBack      Boolean   @default(false)
+  lunchedBackAt    DateTime?
+  lunchedBackBy    String?
   checkedOut       Boolean   @default(false)
   checkedOutAt     DateTime?
   checkedOutBy     String?

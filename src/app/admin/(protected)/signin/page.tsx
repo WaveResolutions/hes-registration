@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { RefreshCw, Loader2, Search, LogIn, LogOut, Phone, AlertTriangle } from 'lucide-react';
+import { RefreshCw, Loader2, Search, LogIn, LogOut, Phone, AlertTriangle, UtensilsCrossed, ArrowLeftRight } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 
@@ -28,6 +28,12 @@ interface Child {
   checkedIn: boolean;
   checkedInAt: string | null;
   checkedInBy: string | null;
+  lunchedOut: boolean;
+  lunchedOutAt: string | null;
+  lunchedOutBy: string | null;
+  lunchedBack: boolean;
+  lunchedBackAt: string | null;
+  lunchedBackBy: string | null;
   checkedOut: boolean;
   checkedOutAt: string | null;
   checkedOutBy: string | null;
@@ -72,7 +78,7 @@ export default function AdminSignInPage() {
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
-  const handleAction = async (childId: string, action: 'checkin' | 'checkout') => {
+  const handleAction = async (childId: string, action: 'checkin' | 'checkout' | 'lunchout' | 'lunchback') => {
     setActionLoading(childId + action);
     try {
       const res = await fetch('/api/admin/signin', {
@@ -81,7 +87,7 @@ export default function AdminSignInPage() {
         body: JSON.stringify({ childId, action, staffName: selectedStaff }),
       });
       if (!res.ok) throw new Error('Action failed');
-      const label = action === 'checkin' ? 'checked in' : 'checked out';
+      const label = { checkin: 'checked in', checkout: 'checked out', lunchout: 'sent to lunch', lunchback: 'back from lunch' }[action] ?? action;
       toast.success(`Child ${label} by ${selectedStaff}`);
       await fetchData();
     } catch {
@@ -109,17 +115,22 @@ export default function AdminSignInPage() {
 
   const getCardBorder = (child: Child) => {
     if (child.checkedOut) return 'border-purple-400 bg-purple-50';
+    if (child.lunchedOut && !child.lunchedBack) return 'border-orange-400 bg-orange-50';
+    if (child.lunchedBack) return 'border-blue-400 bg-blue-50';
     if (child.checkedIn) return 'border-green-400 bg-green-50';
     return 'border-gray-200 bg-white';
   };
 
   const getStatusBadge = (child: Child) => {
     if (child.checkedOut) return <Badge className="bg-purple-100 text-purple-700 border-purple-200 text-xs">Checked Out</Badge>;
+    if (child.lunchedOut && !child.lunchedBack) return <Badge className="bg-orange-100 text-orange-700 border-orange-200 text-xs">Out for Lunch</Badge>;
+    if (child.lunchedBack) return <Badge className="bg-blue-100 text-blue-700 border-blue-200 text-xs">Back from Lunch</Badge>;
     if (child.checkedIn) return <Badge className="bg-green-100 text-green-700 border-green-200 text-xs">Checked In</Badge>;
     return <Badge variant="outline" className="text-gray-400 text-xs">Not Arrived</Badge>;
   };
 
   const arrived = allChildren.filter((c) => c.checkedIn).length;
+  const atLunch = allChildren.filter((c) => c.lunchedOut && !c.lunchedBack).length;
   const checkedOut = allChildren.filter((c) => c.checkedOut).length;
 
   return (
@@ -127,7 +138,7 @@ export default function AdminSignInPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Day-Of Sign In/Out Tracker</h1>
-          <p className="text-gray-500 text-sm mt-1">May 30, 2026 &mdash; {allChildren.length} children total &bull; {arrived} arrived &bull; {checkedOut} departed</p>
+          <p className="text-gray-500 text-sm mt-1">May 30, 2026 &mdash; {allChildren.length} children total &bull; {arrived} arrived &bull; {atLunch} at lunch &bull; {checkedOut} departed</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" onClick={fetchData}>
@@ -172,6 +183,9 @@ export default function AdminSignInPage() {
             const isLoadingCheckIn = actionLoading === child.id + 'checkin';
             const isLoadingCheckOut = actionLoading === child.id + 'checkout';
             const hasAlerts = child.allergies || child.medicalConditions;
+
+            const isLoadingLunchOut = actionLoading === child.id + 'lunchout';
+            const isLoadingLunchBack = actionLoading === child.id + 'lunchback';
 
             return (
               <div
@@ -221,44 +235,72 @@ export default function AdminSignInPage() {
                   </div>
                 )}
 
-                {/* Check-in status */}
-                {child.checkedIn && child.checkedInAt && (
-                  <p className="text-xs text-green-600 mb-2">
-                    In: {new Date(child.checkedInAt).toLocaleTimeString()} by {child.checkedInBy}
-                  </p>
-                )}
-                {child.checkedOut && child.checkedOutAt && (
-                  <p className="text-xs text-purple-600 mb-2">
-                    Out: {new Date(child.checkedOutAt).toLocaleTimeString()} by {child.checkedOutBy}
-                  </p>
-                )}
+                {/* Timeline */}
+                <div className="space-y-0.5 mb-3">
+                  {child.checkedIn && child.checkedInAt && (
+                    <p className="text-xs text-green-600">
+                      In: {new Date(child.checkedInAt).toLocaleTimeString()} by {child.checkedInBy}
+                    </p>
+                  )}
+                  {child.lunchedOut && child.lunchedOutAt && (
+                    <p className="text-xs text-orange-600">
+                      Lunch out: {new Date(child.lunchedOutAt).toLocaleTimeString()} by {child.lunchedOutBy}
+                    </p>
+                  )}
+                  {child.lunchedBack && child.lunchedBackAt && (
+                    <p className="text-xs text-blue-600">
+                      Lunch back: {new Date(child.lunchedBackAt).toLocaleTimeString()} by {child.lunchedBackBy}
+                    </p>
+                  )}
+                  {child.checkedOut && child.checkedOutAt && (
+                    <p className="text-xs text-purple-600">
+                      Out: {new Date(child.checkedOutAt).toLocaleTimeString()} by {child.checkedOutBy}
+                    </p>
+                  )}
+                </div>
 
                 {/* Actions */}
-                <div className="flex gap-2 mt-3">
+                <div className="flex flex-col gap-2 mt-3">
+                  {/* Row 1: Check In (not yet arrived) */}
                   {!child.checkedIn && !child.checkedOut && (
-                    <Button
-                      size="sm"
-                      onClick={() => handleAction(child.id, 'checkin')}
-                      disabled={!!actionLoading}
-                      className="flex-1 bg-green-600 hover:bg-green-700 text-white text-xs"
-                    >
+                    <Button size="sm" onClick={() => handleAction(child.id, 'checkin')} disabled={!!actionLoading}
+                      className="w-full bg-green-600 hover:bg-green-700 text-white text-xs">
                       {isLoadingCheckIn ? <Loader2 className="w-3 h-3 animate-spin" /> : <><LogIn className="w-3 h-3 mr-1" /> Check In</>}
                     </Button>
                   )}
-                  {child.checkedIn && !child.checkedOut && (
-                    <Button
-                      size="sm"
-                      onClick={() => handleAction(child.id, 'checkout')}
-                      disabled={!!actionLoading}
-                      className="flex-1 bg-[#4A1078] hover:bg-purple-900 text-white text-xs"
-                    >
+
+                  {/* Row 1: Checked in — show lunch out + check out */}
+                  {child.checkedIn && !child.checkedOut && !child.lunchedOut && (
+                    <div className="flex gap-2">
+                      <Button size="sm" onClick={() => handleAction(child.id, 'lunchout')} disabled={!!actionLoading}
+                        className="flex-1 bg-orange-500 hover:bg-orange-600 text-white text-xs">
+                        {isLoadingLunchOut ? <Loader2 className="w-3 h-3 animate-spin" /> : <><UtensilsCrossed className="w-3 h-3 mr-1" /> Out for Lunch</>}
+                      </Button>
+                      <Button size="sm" onClick={() => handleAction(child.id, 'checkout')} disabled={!!actionLoading}
+                        className="flex-1 bg-[#4A1078] hover:bg-purple-900 text-white text-xs">
+                        {isLoadingCheckOut ? <Loader2 className="w-3 h-3 animate-spin" /> : <><LogOut className="w-3 h-3 mr-1" /> Check Out</>}
+                      </Button>
+                    </div>
+                  )}
+
+                  {/* Out for lunch — show Back from Lunch */}
+                  {child.lunchedOut && !child.lunchedBack && !child.checkedOut && (
+                    <Button size="sm" onClick={() => handleAction(child.id, 'lunchback')} disabled={!!actionLoading}
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs">
+                      {isLoadingLunchBack ? <Loader2 className="w-3 h-3 animate-spin" /> : <><ArrowLeftRight className="w-3 h-3 mr-1" /> Back from Lunch</>}
+                    </Button>
+                  )}
+
+                  {/* Back from lunch — show Check Out */}
+                  {child.lunchedBack && !child.checkedOut && (
+                    <Button size="sm" onClick={() => handleAction(child.id, 'checkout')} disabled={!!actionLoading}
+                      className="w-full bg-[#4A1078] hover:bg-purple-900 text-white text-xs">
                       {isLoadingCheckOut ? <Loader2 className="w-3 h-3 animate-spin" /> : <><LogOut className="w-3 h-3 mr-1" /> Check Out</>}
                     </Button>
                   )}
+
                   {child.checkedOut && (
-                    <div className="flex-1 text-center text-xs text-purple-600 font-medium py-2">
-                      Released
-                    </div>
+                    <div className="text-center text-xs text-purple-600 font-medium py-2">Released</div>
                   )}
                 </div>
               </div>

@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// eval('require') is the standard escape hatch to prevent Turbopack/webpack
-// from statically analyzing and resolving the module at build time.
-// nodemailer is loaded at runtime via native Node.js require.
-// eslint-disable-next-line no-eval
-const nodemailer: any = eval('require')('nodemailer');
-
+// Lazily load nodemailer at call time (not module load time) using
+// eval('require') so Turbopack's static analyzer never sees the import.
 function getTransporter() {
+  // eslint-disable-next-line no-eval
+  const nodemailer: any = eval('require')('nodemailer');
   return nodemailer.createTransport({
     service: 'gmail',
     auth: {

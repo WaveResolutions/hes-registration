@@ -1,6 +1,6 @@
-﻿export const WAIVER_TEXT = `Childcare Services — LIABILITY WAIVER & RELEASE OF CLAIMS
+export const WAIVER_TEXT = `Childcare Services - LIABILITY WAIVER & RELEASE OF CLAIMS
 Hamro Event Solutions LLC
-Saturday, May 30, 2026 | 8:00 AM — 9:00 PM
+Saturday, May 30, 2026 | 8:00 AM - 9:00 PM
 
 This Liability Waiver and Release of Claims ("Agreement") is entered into by the undersigned parent or legal guardian ("Parent/Guardian") on behalf of themselves and their minor child(ren) ("Child") in favor of Hamro Event Solutions LLC, its members, officers, employees, agents, and contracted staff (collectively "HES").
 
@@ -14,12 +14,12 @@ You represent and warrant that: (a) you are the legal parent or guardian of the 
 
 You acknowledge that supervised childcare activities involve certain inherent risks that cannot be eliminated, including but not limited to:
 
-â€¢ Physical injuries from play activities, arts and crafts, or general movement
-â€¢ Allergic reactions despite staff precautions and disclosed information
-â€¢ Emotional distress or behavioral episodes in a group childcare setting
-â€¢ Incidents arising from interactions between children
-â€¢ Minor accidents including cuts, bruises, or falls during supervised play
-â€¢ Unforeseen medical emergencies requiring emergency response
+- Physical injuries from play activities, arts and crafts, or general movement
+- Allergic reactions despite staff precautions and disclosed information
+- Emotional distress or behavioral episodes in a group childcare setting
+- Incidents arising from interactions between children
+- Minor accidents including cuts, bruises, or falls during supervised play
+- Unforeseen medical emergencies requiring emergency response
 
 In consideration of HES providing childcare services, you, on behalf of yourself, your child(ren), heirs, executors, administrators, and assigns, hereby RELEASE, WAIVE, DISCHARGE, AND COVENANT NOT TO SUE Hamro Event Solutions LLC, its members, managers, officers, employees, agents, volunteers, and contracted staff from any and all liability, claims, demands, actions, and causes of action whatsoever, arising out of or related to any loss, damage, injury, or death that may occur as a result of participation in the HES Childcare Service on May 30, 2026, WHETHER CAUSED BY THE NEGLIGENCE OF HES OR OTHERWISE, to the fullest extent permitted by applicable law.
 
@@ -27,11 +27,11 @@ In consideration of HES providing childcare services, you, on behalf of yourself
 
 You authorize HES staff to:
 
-â€¢ Administer basic first aid in the event of a minor injury or illness
-â€¢ Contact emergency medical services (911) immediately if your child requires emergency medical attention
-â€¢ Transport your child to the nearest medical facility if deemed necessary by staff
-â€¢ Consult with medical professionals regarding your child's condition in an emergency
-â€¢ Act in loco parentis in a medical emergency if you cannot be reached
+- Administer basic first aid in the event of a minor injury or illness
+- Contact emergency medical services (911) immediately if your child requires emergency medical attention
+- Transport your child to the nearest medical facility if deemed necessary by staff
+- Consult with medical professionals regarding your child's condition in an emergency
+- Act in loco parentis in a medical emergency if you cannot be reached
 
 You acknowledge that the nearest hospital to the event venue is Endeavor Health Glenbrook Hospital and consent to your child being transported there if emergency medical care is required.
 
@@ -41,15 +41,15 @@ You agree to disclose all known allergies (food, environmental, medication), cur
 
 You agree to and acknowledge the following supervision and conduct policies:
 
-â€¢ HES staff maintain a maximum child-to-staff ratio appropriate for the age groups present
-â€¢ Children will be supervised at all times during the service period (10:00 AM â€“ 10:00 PM)
-â€¢ Children join parents for lunch from 12:00 PM â€“ 2:00 PM; childcare staff are on break during this period
-â€¢ All children are served buffet dinner alongside staff at 6:30 PM
-â€¢ No child will be released to any person not listed as an authorized pick-up on the registration form
-â€¢ Valid government-issued photo identification is required at pick-up for all authorized individuals
-â€¢ HES reserves the right to contact you immediately if your child's behavior poses a safety risk to themselves or other children
-â€¢ In the event of a child requiring removal from the supervised group, you agree to retrieve your child promptly upon notification
-â€¢ Parents are responsible for ensuring their child has appropriate clothing, personal items, and any required medications clearly labeled
+- HES staff maintain a maximum child-to-staff ratio appropriate for the age groups present
+- Children will be supervised at all times during the service period (8:00 AM - 9:00 PM)
+- Children join parents for lunch from 12:00 PM - 2:00 PM; childcare staff are on break during this period
+- All children are served buffet dinner alongside staff at 6:30 PM
+- No child will be released to any person not listed as an authorized pick-up on the registration form
+- Valid government-issued photo identification is required at pick-up for all authorized individuals
+- HES reserves the right to contact you immediately if your child's behavior poses a safety risk to themselves or other children
+- In the event of a child requiring removal from the supervised group, you agree to retrieve your child promptly upon notification
+- Parents are responsible for ensuring their child has appropriate clothing, personal items, and any required medications clearly labeled
 
 5. MEDIA & PHOTOGRAPHY RELEASE
 
@@ -74,12 +74,12 @@ You represent and warrant that: (a) you are the legal parent or guardian of the 
     title: '2. Assumption of Risk & Waiver of Liability',
     content: `You acknowledge that supervised childcare activities involve certain inherent risks that cannot be eliminated, including but not limited to:
 
-â€¢ Physical injuries from play activities, arts and crafts, or general movement
-â€¢ Allergic reactions despite staff precautions and disclosed information
-â€¢ Emotional distress or behavioral episodes in a group childcare setting
-â€¢ Incidents arising from interactions between children
-â€¢ Minor accidents including cuts, bruises, or falls during supervised play
-â€¢ Unforeseen medical emergencies requiring emergency response
+- Physical injuries from play activities, arts and crafts, or general movement
+- Allergic reactions despite staff precautions and disclosed information
+- Emotional distress or behavioral episodes in a group childcare setting
+- Incidents arising from interactions between children
+- Minor accidents including cuts, bruises, or falls during supervised play
+- Unforeseen medical emergencies requiring emergency response
 
 In consideration of HES providing childcare services, you, on behalf of yourself, your child(ren), heirs, executors, administrators, and assigns, hereby RELEASE, WAIVE, DISCHARGE, AND COVENANT NOT TO SUE Hamro Event Solutions LLC, its members, managers, officers, employees, agents, volunteers, and contracted staff from any and all liability, claims, demands, actions, and causes of action whatsoever, arising out of or related to any loss, damage, injury, or death that may occur as a result of participation in the HES Childcare Service on May 30, 2026, WHETHER CAUSED BY THE NEGLIGENCE OF HES OR OTHERWISE, to the fullest extent permitted by applicable law.`,
   },
@@ -88,11 +88,11 @@ In consideration of HES providing childcare services, you, on behalf of yourself
     title: '3. Medical Authorization & Health Disclosure',
     content: `You authorize HES staff to:
 
-â€¢ Administer basic first aid in the event of a minor injury or illness
-â€¢ Contact emergency medical services (911) immediately if your child requires emergency medical attention
-â€¢ Transport your child to the nearest medical facility if deemed necessary by staff
-â€¢ Consult with medical professionals regarding your child's condition in an emergency
-â€¢ Act in loco parentis in a medical emergency if you cannot be reached
+- Administer basic first aid in the event of a minor injury or illness
+- Contact emergency medical services (911) immediately if your child requires emergency medical attention
+- Transport your child to the nearest medical facility if deemed necessary by staff
+- Consult with medical professionals regarding your child's condition in an emergency
+- Act in loco parentis in a medical emergency if you cannot be reached
 
 You acknowledge that the nearest hospital to the event venue is Endeavor Health Glenbrook Hospital and consent to your child being transported there if emergency medical care is required.
 
@@ -103,15 +103,15 @@ You agree to disclose all known allergies (food, environmental, medication), cur
     title: '4. Code of Conduct & Supervision Policies',
     content: `You agree to and acknowledge the following supervision and conduct policies:
 
-â€¢ HES staff maintain a maximum child-to-staff ratio appropriate for the age groups present
-â€¢ Children will be supervised at all times during the service period (10:00 AM â€“ 10:00 PM)
-â€¢ Children join parents for lunch from 12:00 PM â€“ 2:00 PM; childcare staff are on break during this period
-â€¢ All children are served buffet dinner alongside staff at 6:30 PM
-â€¢ No child will be released to any person not listed as an authorized pick-up on the registration form
-â€¢ Valid government-issued photo identification is required at pick-up for all authorized individuals
-â€¢ HES reserves the right to contact you immediately if your child's behavior poses a safety risk to themselves or other children
-â€¢ In the event of a child requiring removal from the supervised group, you agree to retrieve your child promptly upon notification
-â€¢ Parents are responsible for ensuring their child has appropriate clothing, personal items, and any required medications clearly labeled`,
+- HES staff maintain a maximum child-to-staff ratio appropriate for the age groups present
+- Children will be supervised at all times during the service period (8:00 AM - 9:00 PM)
+- Children join parents for lunch from 12:00 PM - 2:00 PM; childcare staff are on break during this period
+- All children are served buffet dinner alongside staff at 6:30 PM
+- No child will be released to any person not listed as an authorized pick-up on the registration form
+- Valid government-issued photo identification is required at pick-up for all authorized individuals
+- HES reserves the right to contact you immediately if your child's behavior poses a safety risk to themselves or other children
+- In the event of a child requiring removal from the supervised group, you agree to retrieve your child promptly upon notification
+- Parents are responsible for ensuring their child has appropriate clothing, personal items, and any required medications clearly labeled`,
   },
   {
     id: 'media',
@@ -126,4 +126,3 @@ You agree to disclose all known allergies (food, environmental, medication), cur
 By signing below, you acknowledge that you have read this entire Agreement, understand its terms, and agree to be bound by it on behalf of yourself and your child(ren). You confirm that no oral representations, statements, or inducements have been made apart from those contained herein.`,
   },
 ];
-

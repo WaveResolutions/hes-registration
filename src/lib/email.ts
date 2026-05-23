@@ -5,11 +5,15 @@ function getTransporter() {
   // eslint-disable-next-line no-eval
   const nodemailer: any = eval('require')('nodemailer');
   return nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,       // STARTTLS
+    requireTLS: true,
     auth: {
       user: process.env.GMAIL_USER,
       pass: process.env.GMAIL_APP_PASSWORD,
     },
+    tls: { rejectUnauthorized: false },
   });
 }
 

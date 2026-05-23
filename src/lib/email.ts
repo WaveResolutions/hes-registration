@@ -1,7 +1,8 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-// nodemailer is in serverExternalPackages — use require() so Turbopack
-// leaves it as a native Node.js require at runtime instead of bundling it.
-const nodemailer = require('nodemailer') as typeof import('nodemailer');
+/* eslint-disable @typescript-eslint/no-require-imports, @typescript-eslint/no-explicit-any */
+// nodemailer is in serverExternalPackages — use require() with `any` type so
+// Turbopack does NOT try to resolve the nodemailer module at build time.
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const nodemailer: any = require('nodemailer');
 
 function getTransporter() {
   return nodemailer.createTransport({

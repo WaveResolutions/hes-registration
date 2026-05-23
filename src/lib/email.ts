@@ -1,20 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// Lazily load nodemailer at call time (not module load time) using
-// eval('require') so Turbopack's static analyzer never sees the import.
-function getTransporter() {
-  // eslint-disable-next-line no-eval
-  const nodemailer: any = eval('require')('nodemailer');
-  return nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,       // STARTTLS
-    requireTLS: true,
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_APP_PASSWORD,
+// Uses Brevo (formerly Sendinblue) transactional email API via native fetch.
+// No npm packages needed — zero Turbopack bundling issues.
+// Free tier: 300 emails/day. Env vars: BREVO_API_KEY, BREVO_SENDER_EMAIL.
+
+async function brevoSend(payload: object) {
+  const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'api-key': process.env.BREVO_API_KEY ?? '',
     },
-    tls: { rejectUnauthorized: false },
+    body: JSON.stringify(payload),
   });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Brevo error ${res.status}: ${text}`);
+  }
+  return res.json();
 }
 
 export async function sendConfirmationEmail({
@@ -30,34 +31,37 @@ export async function sendConfirmationEmail({
   children: Array<{ firstName: string; lastName: string; age: number }>;
   authorizedPickups: Array<{ name: string }>;
 }) {
-  const transporter = getTransporter();
-  const subject = '✅ Signup Confirmed — HES Childcare May 30, 2026';
-  const childrenList = children.map((c) => `• ${c.firstName} ${c.lastName}, Age ${c.age}`).join('\n');
+  const senderEmail = process.env.BREVO_SENDER_EMAIL ?? 'hamroeventsolutions@gmail.com';
+  const sender = { name: 'HES Childcare', email: senderEmail };
+
+  const childrenList = children
+    .map((c) => `<li>${c.firstName} ${c.lastName}, Age ${c.age}</li>`)
+    .join('');
   const pickupList = authorizedPickups.map((p) => p.name).join(', ');
 
   const html = `
     <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
       <div style="background: #4A1078; padding: 24px; text-align: center;">
         <h1 style="color: white; margin: 0; font-size: 22px;">Hamro Event Solutions LLC</h1>
-        <p style="color: #EDE0F5; margin: 8px 0 0;">Childcare Services — May 30, 2026</p>
+        <p style="color: #EDE0F5; margin: 8px 0 0;">Childcare Services &mdash; May 30, 2026</p>
       </div>
       <div style="padding: 32px 24px;">
         <p>Hi ${parentName},</p>
-        <p>Your signup is <strong>confirmed</strong>! Here's your summary:</p>
+        <p>Your signup is <strong>confirmed</strong>! Here&apos;s your summary:</p>
         <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
           <tr><td style="padding: 8px; font-weight: bold; color: #4A1078;">Confirmation #</td><td style="padding: 8px;">${confirmationNumber}</td></tr>
           <tr style="background:#f9f5ff"><td style="padding: 8px; font-weight: bold; color: #4A1078;">Date</td><td style="padding: 8px;">Saturday, May 30, 2026</td></tr>
-          <tr><td style="padding: 8px; font-weight: bold; color: #4A1078;">Service Hours</td><td style="padding: 8px;">8:00 AM – 9:00 PM</td></tr>
+          <tr><td style="padding: 8px; font-weight: bold; color: #4A1078;">Service Hours</td><td style="padding: 8px;">8:00 AM &ndash; 9:00 PM</td></tr>
           <tr style="background:#f9f5ff"><td style="padding: 8px; font-weight: bold; color: #4A1078;">Signup Fee</td><td style="padding: 8px; color: #059669; font-weight: bold;">FREE</td></tr>
         </table>
         <p><strong>Children Signed Up:</strong></p>
-        <pre style="background: #f9f5ff; padding: 12px; border-radius: 8px; font-family: sans-serif;">${childrenList}</pre>
+        <ul style="background: #f9f5ff; padding: 12px 12px 12px 28px; border-radius: 8px; margin: 0 0 16px;">${childrenList}</ul>
         <p><strong>Authorized Pick-Up:</strong> ${pickupList}</p>
         <div style="background: #FEF3C7; border-left: 4px solid #F59E0B; padding: 16px; margin: 24px 0; border-radius: 0 8px 8px 0;">
           <p style="margin: 0 0 8px; font-weight: bold;">Important Reminders:</p>
           <ul style="margin: 0; padding-left: 20px;">
-            <li>Check-in starts at 8:00 AM — bring valid photo ID</li>
-            <li>Children join parents for lunch 12:00 PM – 2:00 PM</li>
+            <li>Check-in starts at 8:00 AM &mdash; bring valid photo ID</li>
+            <li>Children join parents for lunch 12:00 PM &ndash; 2:00 PM</li>
             <li>Buffet dinner at 6:30 PM includes daycare staff</li>
             <li>Valid photo ID required at pick-up for all authorized pickups</li>
           </ul>
@@ -67,23 +71,30 @@ export async function sendConfirmationEmail({
           Kshitiz Shrestha: (312) 627-0600<br>
           Manish Chaudhary: (847) 224-4156
         </p>
-        <p style="margin-top: 32px; color: #6B7280; font-size: 14px;">See you on May 30!<br>— Hamro Event Solutions LLC</p>
+        <p style="margin-top: 32px; color: #6B7280; font-size: 14px;">See you on May 30!<br>&mdash; Hamro Event Solutions LLC</p>
       </div>
     </div>
   `;
 
-  const adminHtml = `<p>New signup received.</p>
+  const adminHtml = `
+    <p><strong>New signup received.</strong></p>
     <p><strong>Parent:</strong> ${parentName} (${to})</p>
     <p><strong>Children:</strong> ${children.length}</p>
-    <p><strong>Confirmation #:</strong> ${confirmationNumber}</p>`;
+    <p><strong>Confirmation #:</strong> ${confirmationNumber}</p>
+  `;
 
   const [parentResult, adminResult] = await Promise.allSettled([
-    transporter.sendMail({ from: `"HES Childcare" <${process.env.GMAIL_USER}>`, to, subject, html }),
-    transporter.sendMail({
-      from: `"HES Childcare" <${process.env.GMAIL_USER}>`,
-      to: process.env.GMAIL_USER,
-      subject: `New Signup: ${parentName} — ${children.length} child(ren)`,
-      html: adminHtml,
+    brevoSend({
+      sender,
+      to: [{ email: to, name: parentName }],
+      subject: 'Signup Confirmed - HES Childcare May 30, 2026',
+      htmlContent: html,
+    }),
+    brevoSend({
+      sender,
+      to: [{ email: senderEmail, name: 'HES Admin' }],
+      subject: `New Signup: ${parentName} - ${children.length} child(ren)`,
+      htmlContent: adminHtml,
     }),
   ]);
 

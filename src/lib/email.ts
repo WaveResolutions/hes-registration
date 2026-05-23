@@ -1,4 +1,7 @@
-import nodemailer from 'nodemailer';
+/* eslint-disable @typescript-eslint/no-require-imports */
+// nodemailer is in serverExternalPackages — use require() so Turbopack
+// leaves it as a native Node.js require at runtime instead of bundling it.
+const nodemailer = require('nodemailer') as typeof import('nodemailer');
 
 function getTransporter() {
   return nodemailer.createTransport({

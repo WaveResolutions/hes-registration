@@ -301,9 +301,9 @@ export default function LandingPage() {
             </div>
             <div>
               <h4 className="font-bold mb-3 text-sm uppercase tracking-wide text-gray-300">Contact</h4>
-              <a href="mailto:info@hamroeventsolutions.com" className="flex items-center gap-2 text-sm text-gray-300 hover:text-white mb-2">
+              <a href="mailto:hamroeventsolutions@gmail.com" className="flex items-center gap-2 text-sm text-gray-300 hover:text-white mb-2">
                 <Mail className="w-4 h-4" />
-                info@hamroeventsolutions.com
+                hamroeventsolutions@gmail.com
               </a>
               {registrationOpen && (
                 <Link href="/register" className="inline-flex items-center gap-1 bg-[#4A1078] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-900 mt-2">

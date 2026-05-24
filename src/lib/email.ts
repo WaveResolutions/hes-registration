@@ -87,7 +87,7 @@ export async function sendConfirmationEmail({
     brevoSend({
       sender,
       to: [{ email: to, name: parentName }],
-      subject: 'Signup Confirmed - HES Childcare May 30, 2026',
+      subject: 'Signup Confirmed - Hamro Event Solutions Childcare Service May 30, 2026',
       htmlContent: html,
     }),
     brevoSend({
